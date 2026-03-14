@@ -7,7 +7,22 @@ import remarkReadingTime from "remark-reading-time";
 
 export default defineConfig({
   site: "https://wortaso.github.io/",
-  integrations: [sitemap(), icon(), mdx()],
+  integrations: [
+    sitemap({
+      i18n: {
+        defaultLocale: "en",
+        locales: {
+          en: "en-US",
+          de: "de-DE",
+        },
+      },
+      filter: (page) =>
+        !page.includes("/de/404") &&
+        !page.includes("/widgets"),
+    }),
+    icon(),
+    mdx(),
+  ],
   markdown: {
     remarkPlugins: [
       remarkReadingTime,

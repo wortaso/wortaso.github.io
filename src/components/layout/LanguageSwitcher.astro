@@ -1,15 +1,22 @@
 ---
 import { getLangFromUrl, getAlternatePath, languages, type Lang } from "@/i18n";
 
+interface Props {
+  alternateHref?: string;
+}
+
+const { alternateHref } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
-const alternatePath = getAlternatePath(Astro.url);
+const computedAlternate = getAlternatePath(Astro.url);
 const langCodes = Object.keys(languages) as Lang[];
 ---
 
 <div class="flex items-center gap-1 text-xs font-semibold">
   {
     langCodes.map((code) => {
-      const href = code === lang ? Astro.url.pathname : alternatePath;
+      const href = code === lang
+        ? Astro.url.pathname
+        : (alternateHref ?? computedAlternate);
       return (
         <a
           href={href}

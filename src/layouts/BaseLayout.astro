@@ -4,6 +4,7 @@ interface Props {
   description?: string;
   ogImage?: string;
   canonical?: string;
+  alternateHref?: string;
   metadata?: {
     title?: string;
     description?: string;
@@ -11,6 +12,7 @@ interface Props {
     canonical?: string;
     ignoreTitleTemplate?: boolean;
     noindex?: boolean;
+    alternateHref?: string;
   };
 }
 
@@ -24,8 +26,12 @@ import SpeedInsights from "@vercel/speed-insights/astro";
 import Analytics from "@vercel/analytics/astro";
 
 import { siteConfig } from "@/config/site";
+import { getLangFromUrl } from "@/i18n";
 
-const { title, description, ogImage, canonical, metadata } = Astro.props;
+const { title, description, ogImage, canonical, metadata, alternateHref } = Astro.props;
+
+const pageLang = getLangFromUrl(Astro.url);
+const finalAlternateHref = metadata?.alternateHref || alternateHref;
 
 const finalTitle = metadata?.title || title;
 const finalDescription = metadata?.description || description;
@@ -36,7 +42,7 @@ const finalNoindex = metadata?.noindex || false;
 ---
 
 <!doctype html>
-<html lang={siteConfig.lang} class="scroll-smooth">
+<html lang={pageLang} class="scroll-smooth">
   <head>
     <Seo
       title={finalTitle}
@@ -45,6 +51,7 @@ const finalNoindex = metadata?.noindex || false;
       canonical={finalCanonical}
       ignoreTitleTemplate={finalIgnoreTitleTemplate}
       noindex={finalNoindex}
+      alternateHref={finalAlternateHref}
     />
     <ClientRouter />
     <Schema type="WebSite" data={{}} />
@@ -103,7 +110,7 @@ const finalNoindex = metadata?.noindex || false;
         </div>
       </div>
 
-      <Navbar />
+      <Navbar alternateHref={finalAlternateHref} />
       <main id="main-content" class="relative z-10 grow pt-[72px]">
         <slot />
       </main>

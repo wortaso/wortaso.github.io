@@ -1,5 +1,6 @@
 ---
 import type { ImageMetadata } from "astro";
+import { getLangFromUrl } from "@/i18n";
 interface Props {
   title?: string;
   description?: string;
@@ -7,6 +8,7 @@ interface Props {
   ogImage?: string | ImageMetadata;
   ignoreTitleTemplate?: boolean;
   noindex?: boolean;
+  alternateHref?: string;
 }
 
 import { siteConfig } from "@/config/site";
@@ -18,7 +20,14 @@ const {
   ogImage = siteConfig.ogImage,
   ignoreTitleTemplate = false,
   noindex = false,
+  alternateHref,
 } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const selfHref = new URL(Astro.url.pathname, siteConfig.url).toString();
+const altHref = alternateHref
+  ? new URL(alternateHref, siteConfig.url).toString()
+  : undefined;
 
 const ogImageSrc = typeof ogImage === "string" ? ogImage : ogImage.src;
 
@@ -32,6 +41,13 @@ const canonicalURL =
 
 <!-- Global Metadata -->
 {noindex && <meta name="robots" content="noindex, nofollow" />}
+{altHref && (
+  <>
+    <link rel="alternate" hreflang={lang === "de" ? "de" : "en"} href={selfHref} />
+    <link rel="alternate" hreflang={lang === "de" ? "en" : "de"} href={altHref} />
+    <link rel="alternate" hreflang="x-default" href={lang === "de" ? altHref : selfHref} />
+  </>
+)}
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />

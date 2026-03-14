@@ -6,6 +6,7 @@ author: "Wortaso"
 category: "Learning"
 tags: ["german", "german article", "grammar", "tips"]
 image: "/blog/german-articles-noun-endings.webp"
+translation: "deutsche-artikel-substantivendungen"
 ---
 
 One of the biggest challenges in learning German is remembering the correct article for nouns: **der (masculine), die (feminine), and das (neuter)**.

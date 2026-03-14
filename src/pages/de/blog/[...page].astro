@@ -12,7 +12,7 @@ const t = useTranslations("de");
 export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
   const blogEntries = await getCollection("blog");
   const sortedPosts = blogEntries
-    .filter((post) => post.data && post.data.pubDate)
+    .filter((post) => post.data && post.data.pubDate && post.data.lang === "de")
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
   return paginate(sortedPosts, { pageSize: 6 });

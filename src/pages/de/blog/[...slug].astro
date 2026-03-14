@@ -15,7 +15,9 @@ export async function getStaticPaths() {
 const t = useTranslations("de");
 const { post } = Astro.props;
 const { Content, remarkPluginFrontmatter } = await render(post);
-const { title, description, pubDate, author, image } = post.data;
+const { title, description, pubDate, author, image, translation } = post.data;
+
+const alternateHref = translation ? `/blog/${translation}` : undefined;
 
 const formattedDate = pubDate.toLocaleDateString("de-DE", {
   year: "numeric",
@@ -31,6 +33,7 @@ const metadata = {
   title: title,
   description: description,
   ogImage: image,
+  alternateHref,
 };
 ---
 
