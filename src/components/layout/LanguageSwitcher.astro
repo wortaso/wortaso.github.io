@@ -1,0 +1,28 @@
+---
+import { getLangFromUrl, getAlternatePath, languages, type Lang } from "@/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const alternatePath = getAlternatePath(Astro.url);
+const langCodes = Object.keys(languages) as Lang[];
+---
+
+<div class="flex items-center gap-1 text-xs font-semibold">
+  {
+    langCodes.map((code) => {
+      const href = code === lang ? Astro.url.pathname : alternatePath;
+      return (
+        <a
+          href={href}
+          class={`px-2 py-1 rounded transition-colors ${
+            lang === code
+              ? "bg-primary text-white"
+              : "text-muted-foreground hover:text-foreground hover:bg-muted"
+          }`}
+          aria-label={`Switch to ${languages[code]}`}
+        >
+          {code.toUpperCase()}
+        </a>
+      );
+    })
+  }
+</div>

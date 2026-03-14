@@ -1,17 +1,22 @@
 ---
 import Tags from "@/components/ui/Tags.astro";
 import { type CollectionEntry, render } from "astro:content";
+import type { Lang } from "@/i18n";
 
 export interface Props {
   post: CollectionEntry<"blog">;
+  lang?: Lang;
 }
 
-const { post } = Astro.props;
+const { post, lang = "en" } = Astro.props;
 const { remarkPluginFrontmatter } = await render(post);
 
 const readingTime = remarkPluginFrontmatter?.minutesRead
-  ? `${Math.ceil(remarkPluginFrontmatter.minutesRead)} min read`
+  ? `${Math.ceil(remarkPluginFrontmatter.minutesRead)} ${lang === "de" ? "Min. Lesezeit" : "min read"}`
   : "";
+
+const postHref = lang === "de" ? `/de/blog/${post.id}` : `/blog/${post.id}`;
+const dateLocale = lang === "de" ? "de-DE" : "en-US";
 ---
 
 <article
@@ -34,7 +39,7 @@ const readingTime = remarkPluginFrontmatter?.minutesRead
         {post.data.author}
       </p>
       <a
-        href={`/blog/${post.id}`}
+        href={postHref}
         class="mt-2 block before:absolute before:inset-0 before:z-10"
       >
         <p class="text-xl font-semibold text-foreground group-hover:underline">
@@ -55,7 +60,7 @@ const readingTime = remarkPluginFrontmatter?.minutesRead
         <div class="flex space-x-1 text-sm text-muted-foreground">
           <time datetime={post.data.pubDate.toISOString()}>
             {
-              post.data.pubDate.toLocaleDateString("en-US", {
+              post.data.pubDate.toLocaleDateString(dateLocale, {
                 year: "numeric",
                 month: "long",
                 day: "numeric",

@@ -1,5 +1,9 @@
 ---
 import { siteConfig } from "@/config/site";
+import { getLangFromUrl, useTranslations, getLocalizedPath } from "@/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <footer class="mt-20 border-t border-border bg-card">
@@ -7,8 +11,8 @@ import { siteConfig } from "@/config/site";
     <div
       class="flex flex-col items-center gap-2 text-center text-xs text-muted-foreground"
     >
-      <a href="/privacy-policy" class="hover:text-primary transition-colors">Privacy Policy</a>
-      <span>&copy; {new Date().getFullYear()} {siteConfig.author}. All rights reserved.</span>
+      <a href={getLocalizedPath("/privacy-policy", lang)} class="hover:text-primary transition-colors">{t.footer.privacy}</a>
+      <span>&copy; {new Date().getFullYear()} {siteConfig.author}. {t.footer.copyright}</span>
     </div>
   </div>
 </footer>
