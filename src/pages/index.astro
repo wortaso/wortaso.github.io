@@ -17,20 +17,23 @@ const metadata = {
     </p>
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center">
-      <!-- App Store -->
-      <a
-        href="#"
-        class="inline-flex items-center justify-center gap-2 rounded-xl bg-black text-white px-8 py-4 text-base font-semibold shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 dark:bg-white dark:text-black"
+      <!-- App Store — opens waitlist modal -->
+      <button
+        id="ios-waitlist-btn"
+        type="button"
+        class="inline-flex items-center justify-center gap-2 rounded-xl bg-black text-white px-8 py-4 text-base font-semibold shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200 dark:bg-white dark:text-black cursor-pointer"
       >
         <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
           <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
         </svg>
         App Store
-      </a>
+      </button>
 
       <!-- Google Play -->
       <a
-        href="#"
+        href="https://play.google.com/store/apps/details?id=com.wortaso.app&hl=en"
+        target="_blank"
+        rel="noopener noreferrer"
         class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#01875f] text-white px-8 py-4 text-base font-semibold shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200"
       >
         <svg class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="currentColor">
@@ -39,6 +42,53 @@ const metadata = {
         Google Play
       </a>
     </div>
+
+    <!-- iOS Waitlist Modal -->
+    <dialog
+      id="waitlist-modal"
+      class="m-auto rounded-2xl shadow-2xl p-0 w-full max-w-md backdrop:bg-black/50 backdrop:backdrop-blur-sm"
+    >
+      <div class="bg-background text-foreground rounded-2xl p-8 relative">
+        <button
+          id="waitlist-close"
+          type="button"
+          aria-label="Close"
+          class="absolute top-4 right-4 text-muted-foreground hover:text-foreground transition-colors text-xl leading-none"
+        >&times;</button>
+
+        <div class="mb-6 text-center">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-black dark:bg-white mb-4">
+            <svg class="w-6 h-6 text-white dark:text-black" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+            </svg>
+          </div>
+          <h2 class="text-2xl font-bold mb-2">iOS App — Coming Soon</h2>
+          <p class="text-muted-foreground text-sm">Join the waitlist and we'll notify you when it launches.</p>
+        </div>
+
+        <form id="waitlist-form" novalidate>
+          <div class="mb-4">
+            <label for="waitlist-email" class="block text-sm font-medium mb-1">Email address</label>
+            <input
+              type="email"
+              id="waitlist-email"
+              name="email"
+              required
+              placeholder="you@example.com"
+              class="block w-full rounded-xl border border-border bg-muted/50 px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-4 focus:ring-primary/20 focus:border-primary transition-all"
+            />
+          </div>
+          <button
+            type="submit"
+            class="w-full inline-flex items-center justify-center rounded-xl bg-black text-white dark:bg-white dark:text-black px-6 py-3 font-semibold shadow-md hover:-translate-y-0.5 hover:shadow-lg transition-all duration-200"
+          >
+            Notify Me
+          </button>
+        </form>
+
+        <p id="waitlist-msg" class="mt-4 text-center text-sm hidden"></p>
+      </div>
+    </dialog>
   </section>
 
   <!-- App Screenshots -->
@@ -91,5 +141,56 @@ const metadata = {
       },
     ]}
   />
+<script>
+  const btn = document.getElementById('ios-waitlist-btn') as HTMLButtonElement;
+  const modal = document.getElementById('waitlist-modal') as HTMLDialogElement;
+  const closeBtn = document.getElementById('waitlist-close') as HTMLButtonElement;
+  const form = document.getElementById('waitlist-form') as HTMLFormElement;
+  const msg = document.getElementById('waitlist-msg') as HTMLParagraphElement;
+
+  btn.addEventListener('click', () => {
+    msg.classList.add('hidden');
+    msg.textContent = '';
+    (form.querySelector('#waitlist-email') as HTMLInputElement).value = '';
+    modal.showModal();
+  });
+
+  closeBtn.addEventListener('click', () => modal.close());
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.close();
+  });
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const submitBtn = form.querySelector('[type=submit]') as HTMLButtonElement;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    const data = new FormData(form);
+    try {
+      const res = await fetch('https://formspree.io/f/xaqpdvko', {
+        method: 'POST',
+        body: data,
+        headers: { Accept: 'application/json' },
+      });
+      if (res.ok) {
+        form.classList.add('hidden');
+        msg.textContent = "You're on the list! We'll email you when the iOS app launches.";
+        msg.className = 'mt-4 text-center text-sm text-green-600 dark:text-green-400';
+      } else {
+        msg.textContent = 'Something went wrong. Please try again.';
+        msg.className = 'mt-4 text-center text-sm text-red-600 dark:text-red-400';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Notify Me';
+      }
+    } catch {
+      msg.textContent = 'Network error. Please try again.';
+      msg.className = 'mt-4 text-center text-sm text-red-600 dark:text-red-400';
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Notify Me';
+    }
+  });
+</script>
 </BaseLayout>
 
