@@ -17,7 +17,7 @@ const {
   title,
   description = siteConfig.description,
   canonical,
-  ogImage = siteConfig.ogImage,
+  ogImage = undefined,
   ignoreTitleTemplate = false,
   noindex = false,
   alternateHref,
@@ -29,7 +29,11 @@ const altHref = alternateHref
   ? new URL(alternateHref, siteConfig.url).toString()
   : undefined;
 
-const ogImageSrc = typeof ogImage === "string" ? ogImage : ogImage.src;
+const ogImageSrc = ogImage
+  ? typeof ogImage === "string"
+    ? ogImage
+    : ogImage.src
+  : undefined;
 
 const fullTitle =
   title && !ignoreTitleTemplate
@@ -68,7 +72,7 @@ const canonicalURL =
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(ogImageSrc, siteConfig.url)} />
+{ogImageSrc && <meta property="og:image" content={new URL(ogImageSrc, siteConfig.url)} />}
 <meta property="og:locale" content={siteConfig.locale} />
 
 <!-- Twitter -->
@@ -76,7 +80,7 @@ const canonicalURL =
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={fullTitle} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(ogImageSrc, siteConfig.url)} />
+{ogImageSrc && <meta property="twitter:image" content={new URL(ogImageSrc, siteConfig.url)} />}
 {
   siteConfig.twitter && (
     <meta property="twitter:creator" content={siteConfig.twitter} />

@@ -1,5 +1,3 @@
-import ogImage from "@/assets/og-image.png";
-
 export const siteConfig = {
   name: "Wortaso",
   description:
@@ -9,7 +7,6 @@ export const siteConfig = {
   locale: "en_US",
   author: "Wortaso",
   twitter: "@Wortaso",
-  ogImage: ogImage,
   socialLinks: {
     twitter: "https://twitter.com",
     github: "https://github.com",
