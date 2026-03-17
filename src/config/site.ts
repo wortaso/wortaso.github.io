@@ -2,7 +2,7 @@ export const siteConfig = {
   name: "Wortaso",
   description:
     "Download Wortaso — available on iOS App Store and Google Play.",
-  url: "https://wortaso.github.io",
+  url: "https://wortaso.app",
   lang: "en",
   locale: "en_US",
   author: "Wortaso",
