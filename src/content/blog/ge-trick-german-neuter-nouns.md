@@ -6,6 +6,7 @@ author: "Wortaso"
 category: "Learning"
 tags: ["german", "german article", "grammar", "tips"]
 image: "/blog/ge-trick-german-neuter-nouns.webp"
+translation: "ge-trick-deutsche-neutrale-nomen"
 ---
 
 If you've noticed that many German nouns starting with **"Ge-"** use *das*, you're not imagining things. This is one of the most reliable patterns in the language—and one you can actively use to your advantage.

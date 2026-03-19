@@ -7,6 +7,7 @@ category: "Lernen"
 tags: ["Deutsch", "deutscher Artikel", "Grammatik", "Tipps"]
 image: "/blog/ge-trick-german-neuter-nouns.webp"
 lang: "de"
+translation: "ge-trick-german-neuter-nouns"
 ---
 
 Falls dir aufgefallen ist, dass viele deutsche Nomen, die mit **„Ge-"** beginnen, den Artikel *das* verwenden, täuschst du dich nicht. Dies ist eines der verlässlichsten Muster in der Sprache – und eines, das du aktiv zu deinem Vorteil nutzen kannst.
