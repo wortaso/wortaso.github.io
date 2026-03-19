@@ -6,9 +6,11 @@ import { useTranslations } from "@/i18n";
 const t = useTranslations("de");
 
 const metadata = {
-  title: "Wortaso — App herunterladen",
-  description: t.hero.subtitle,
+  title: "Wortaso — Deutsche Artikel lernen | Der Die Das App",
+  description:
+    "Hör auf zu raten: Der, Die oder Das? Wortaso ist die App zum Lernen deutscher Artikel – 10.000+ Nomen, Spaced Repetition, null Werbung.",
   ignoreTitleTemplate: true,
+  alternateHref: "/",
 };
 ---
 
@@ -57,7 +59,9 @@ const metadata = {
   <!-- App Screenshots -->
   <section class="py-16 px-4">
     <div class="mx-auto max-w-5xl text-center mb-10">
-      <p class="text-sm font-semibold uppercase tracking-widest text-primary mb-2">
+      <p
+        class="text-sm font-semibold uppercase tracking-widest text-primary mb-2"
+      >
         {t.screenshots.tagline}
       </p>
       <h2 class="text-3xl font-bold tracking-tight">{t.screenshots.title}</h2>
@@ -90,8 +94,18 @@ const metadata = {
     features={t.features.items.map((item, i) => ({
       title: item.title,
       description: item.description,
-      icon: i === 0 ? "lucide:shield-off" : i === 1 ? "lucide:book-open" : "lucide:brain",
-      iconClass: i === 0 ? "bg-blue-500/10 text-blue-400" : i === 1 ? "bg-purple-500/10 text-purple-400" : "bg-pink-500/10 text-pink-400",
+      icon:
+        i === 0
+          ? "lucide:shield-off"
+          : i === 1
+            ? "lucide:book-open"
+            : "lucide:brain",
+      iconClass:
+        i === 0
+          ? "bg-blue-500/10 text-blue-400"
+          : i === 1
+            ? "bg-purple-500/10 text-purple-400"
+            : "bg-pink-500/10 text-pink-400",
     }))}
   />
 </BaseLayout>

@@ -2,7 +2,7 @@
 import { siteConfig } from "@/config/site";
 
 interface Props {
-  type: "WebSite" | "BlogPosting" | "BreadcrumbList";
+  type: "WebSite" | "BlogPosting" | "BreadcrumbList" | "SoftwareApplication";
   data: {
     title?: string;
     description?: string;
@@ -54,6 +54,26 @@ if (type === "WebSite") {
         // Placeholder, ideally should be a real logo URL
         url: new URL("/favicon.ico", siteConfig.url).toString(),
       },
+    },
+  };
+} else if (type === "SoftwareApplication") {
+  schema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: siteConfig.name,
+    url: siteConfig.url,
+    description: siteConfig.description,
+    operatingSystem: "Android, iOS",
+    applicationCategory: "EducationApplication",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    installUrl: "https://play.google.com/store/apps/details?id=com.wortaso.app",
+    author: {
+      "@type": "Person",
+      name: siteConfig.author,
     },
   };
 }

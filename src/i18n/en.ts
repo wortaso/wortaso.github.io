@@ -1,7 +1,7 @@
 export const en = {
     nav: { home: "Home", blog: "Blog" },
     hero: {
-        subtitle: "Download our app and get started today!",
+        subtitle: "Stop guessing. Learn every German noun's article with proven spaced repetition — 10,000+ nouns, zero ads.",
         appStore: "App Store",
         googlePlay: "Google Play",
     },
@@ -9,15 +9,15 @@ export const en = {
         tagline: "App Preview",
         title: "See it in action",
         alt: [
-            "Wortaso app screenshot 1",
-            "Wortaso app screenshot 2",
-            "Wortaso app screenshot 3",
+            "Wortaso flashcard screen — German noun with der article color-coded in blue",
+            "Wortaso quiz mode — practice der die das for German nouns with spaced repetition",
+            "Wortaso built-in dictionary — search 10,000+ German nouns with articles",
         ],
     },
     features: {
         tagline: "Features",
         title: "What's Included",
-        subtitle: "Everything you need to master German vocabulary.",
+        subtitle: "Everything you need to master German articles once and for all.",
         items: [
             {
                 title: "No Ads",

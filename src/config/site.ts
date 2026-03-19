@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: "Wortaso",
   description:
-    "Download Wortaso — available on iOS App Store and Google Play.",
+    "Stop guessing Der, Die, or Das. Wortaso is the German article learning app with 10,000+ nouns, spaced repetition, and zero ads.",
   url: "https://wortaso.app",
   lang: "en",
   locale: "en_US",

@@ -3,7 +3,7 @@ import type { Translations } from "./en";
 export const de: Translations = {
     nav: { home: "Startseite", blog: "Blog" },
     hero: {
-        subtitle: "Lade unsere App herunter und fang noch heute an!",
+        subtitle: "Hör auf zu raten. Lerne den Artikel jedes deutschen Nomens mit bewährtem Spaced Repetition — 10.000+ Nomen, null Werbung.",
         appStore: "App Store",
         googlePlay: "Google Play",
     },
@@ -11,15 +11,15 @@ export const de: Translations = {
         tagline: "App-Vorschau",
         title: "Sieh es in Aktion",
         alt: [
-            "Wortaso App-Screenshot 1",
-            "Wortaso App-Screenshot 2",
-            "Wortaso App-Screenshot 3",
+            "Wortaso Lernkarte — deutsches Nomen mit dem blau markierten Artikel \"der\"",
+            "Wortaso Quiz-Modus — Der, Die oder Das für deutsche Nomen mit Spaced Repetition üben",
+            "Wortaso eingebautes Wörterbuch — über 10.000 deutsche Nomen mit Artikeln durchsuchen",
         ],
     },
     features: {
         tagline: "Funktionen",
         title: "Was enthalten ist",
-        subtitle: "Alles, was du brauchst, um deutschen Wortschatz zu meistern.",
+        subtitle: "Alles, was du brauchst, um deutsche Artikel ein für alle Mal zu meistern.",
         items: [
             {
                 title: "Keine Werbung",
