@@ -50,12 +50,24 @@ const navLinks = [
     </div>
 
     <div class="hidden md:flex items-center gap-4">
+      <a
+        href={getLocalizedPath("/", lang)}
+        class="inline-flex items-center justify-center rounded-lg bg-foreground px-4 py-1.5 text-sm font-semibold text-background transition-colors hover:bg-foreground/90"
+      >
+        {t.nav.download}
+      </a>
       <LanguageSwitcher alternateHref={alternateHref} />
       <ThemeToggle />
     </div>
 
     <!-- Mobile Menu Button -->
-    <div class="md:hidden flex items-center">
+    <div class="md:hidden flex items-center gap-2">
+      <a
+        href={getLocalizedPath("/", lang)}
+        class="inline-flex items-center justify-center rounded-lg bg-foreground px-3 py-1.5 text-sm font-semibold text-background transition-colors hover:bg-foreground/90"
+      >
+        {t.nav.download}
+      </a>
       <button
         id="mobile-menu-button"
         type="button"
@@ -95,7 +107,7 @@ const navLinks = [
             d="M6 18L18 6M6 6l12 12"></path>
         </svg>
       </button>
-      <div class="ml-2">
+      <div>
         <ThemeToggle />
       </div>
     </div>
