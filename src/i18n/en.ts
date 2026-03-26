@@ -1,5 +1,5 @@
 export const en = {
-    nav: { home: "Home", blog: "Blog", download: "Download" },
+    nav: { home: "Home", blog: "Blog", cheatsheet: "Der Die Das Cheatsheet", download: "Download" },
     hero: {
         subtitle: "Stop guessing. Learn every German noun's article with proven spaced repetition — 10,000+ nouns, zero ads.",
         appStore: "App Store",

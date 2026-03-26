@@ -1,7 +1,7 @@
 import type { Translations } from "./en";
 
 export const de: Translations = {
-    nav: { home: "Startseite", blog: "Blog", download: "Download" },
+    nav: { home: "Startseite", blog: "Blog", cheatsheet: "Der Die Das Spickzettel", download: "Download" },
     hero: {
         subtitle: "Hör auf zu raten. Lerne den Artikel jedes deutschen Nomens mit bewährtem Spaced Repetition — 10.000+ Nomen, null Werbung.",
         appStore: "App Store",

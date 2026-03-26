@@ -15,6 +15,13 @@ const t = useTranslations(lang);
 const navLinks = [
   { text: t.nav.home, href: getLocalizedPath("/", lang) },
   { text: t.nav.blog, href: getLocalizedPath("/blog", lang) },
+  {
+    text: t.nav.cheatsheet,
+    href:
+      lang === "de"
+        ? "/de/der-die-das-spickzettel"
+        : "/der-die-das-cheatsheet",
+  },
 ];
 ---
 

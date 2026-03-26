@@ -1,0 +1,391 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const metadata = {
+  title:
+    "Der Die Das Spickzettel: Der ultimative Leitfaden für deutsche Artikel",
+  description:
+    "Der ultimative Der-Die-Das-Spickzettel. Alle verlässlichen Regeln für deutsche Artikel nach Endung und Bedeutung — auf einen Blick. Kostenlose Referenz für Deutschlernende.",
+  canonical: "/de/der-die-das-spickzettel",
+  alternateHref: "/der-die-das-cheatsheet",
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Was ist ein Der-Die-Das-Spickzettel?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Ein Der-Die-Das-Spickzettel ist ein kompaktes Nachschlagewerk, das die Regeln zur Bestimmung des deutschen Artikels (der, die, das) anhand von Substantivendungen und Bedeutungskategorien auflistet. Anstatt jedes Nomen einzeln auswendig zu lernen, kannst du diese Muster anwenden, die den Großteil der Fälle abdecken.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wie viele Artikel gibt es im Deutschen?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Das Deutsche hat drei bestimmte Artikel: der (maskulin), die (feminin) und das (neutral). Im Plural verwenden alle Nomen die – unabhängig vom Singular-Genus.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Welche Substantivendungen sind immer feminin (die)?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "-heit und -keit sind zu 100 % feminin (z. B. die Freiheit, die Höflichkeit). -ung ist zu 99 % feminin (z. B. die Zeitung). Weitere sehr verlässliche feminine Endungen sind -schaft, -ion, -ität, -ik, -anz, -enz und -ur.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Welche Substantivendungen sind immer neutral (das)?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "-chen und -lein sind immer neutral (100 %) – z. B. das Mädchen, das Fräulein. Weitere verlässliche neutrale Endungen sind -ment, -um, -ma und -tum.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Welche Endungen sind verlässliche Hinweise auf 'der'?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Die verlässlichsten maskulinen Endungen sind -ig (der Honig), -ling (der Schmetterling), -ismus (der Optimismus), -or (der Motor), -ant (der Elefant) und -ich (der Teppich).",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Welchen Artikel haben Substantive im Plural?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Alle deutschen Substantive im Plural verwenden die – unabhängig vom Singular-Artikel. Beispiel: der Mann → die Männer, das Kind → die Kinder, die Frau → die Frauen.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Wie bestimmt man den Artikel bei zusammengesetzten Nomen?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Bei deutschen Komposita bestimmt immer das letzte Wort den Artikel des gesamten Nomens. Beispiel: der Tisch + die Decke = die Tischdecke; die Hand + der Schuh = der Handschuh.",
+      },
+    },
+  ],
+};
+---
+
+<BaseLayout {metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+  </Fragment>
+
+  <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+    <h1 class="text-4xl font-bold tracking-tight mb-4">
+      Der Die Das Spickzettel: Der ultimative Leitfaden
+    </h1>
+    <p class="text-muted-foreground mb-3">
+      Den richtigen deutschen Artikel zu wählen – <strong>der</strong>, <strong
+        >die</strong
+      > oder <strong>das</strong> – ist eine der größten Herausforderungen beim Deutschlernen.
+      Dieser Der-Die-Das-Spickzettel fasst alle verlässlichen Regeln an einem Ort
+      zusammen: vorhersagbare Substantivendungen (Suffixe) und bedeutungsbasierte
+      Kategorien, damit du aufhörst zu raten und anfängst, Muster anzuwenden.
+    </p>
+    <p class="text-muted-foreground mb-10">
+      Nutze ihn als schnelles Nachschlagewerk beim Lernen oder zusammen mit der <a
+        href="https://apps.apple.com/app/wortaso/id6473643421"
+        class="text-primary underline underline-offset-2 hover:text-primary/80"
+        target="_blank"
+        rel="noopener noreferrer">Wortaso-App</a
+      >, um jede Regel mit Spaced Repetition über 10.000+ Nomen zu festigen.
+    </p>
+
+    <!-- 1. Maskulin -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">1. Maskulin (Der)</h2>
+
+      <h3 class="text-lg font-semibold mb-3">Nach Endung</h3>
+      <div class="overflow-x-auto mb-6">
+        <table
+          class="w-full text-sm border border-border rounded-lg overflow-hidden"
+        >
+          <thead class="bg-muted text-muted-foreground">
+            <tr>
+              <th class="text-left px-4 py-2 font-semibold">Endung</th>
+              <th class="text-left px-4 py-2 font-semibold">Verlässlichkeit</th>
+              <th class="text-left px-4 py-2 font-semibold">Beispiel</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              [
+                ["‑ig", "Hoch", "der Honig"],
+                ["‑ling", "Hoch", "der Schmetterling"],
+                ["‑ismus", "Hoch", "der Optimismus"],
+                ["‑or", "Hoch", "der Motor"],
+                ["‑ant", "Hoch", "der Elefant"],
+                ["‑ich", "Hoch", "der Teppich"],
+                ["‑er", "Mittel", "der Lehrer"],
+              ].map(([ending, reliability, example], i) => (
+                <tr
+                  class:list={[
+                    "border-t border-border",
+                    i % 2 === 0 ? "" : "bg-muted/30",
+                  ]}
+                >
+                  <td class="px-4 py-2 font-mono font-semibold">{ending}</td>
+                  <td class="px-4 py-2">{reliability}</td>
+                  <td class="px-4 py-2 italic">{example}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="text-lg font-semibold mb-3">Nach Bedeutung</h3>
+      <ul class="list-disc pl-6 space-y-1 text-sm">
+        <li>
+          <strong>Wochentage, Monate, Jahreszeiten:</strong> Montag, Juli, Sommer.
+        </li>
+        <li><strong>Wetter:</strong> Regen, Schnee, Wind.</li>
+        <li>
+          <strong>Himmelsrichtungen:</strong> Norden, Süden, Osten, Westen.
+        </li>
+        <li><strong>Alkohol:</strong> Wein, Wodka, Gin.</li>
+        <li><strong>Automarken:</strong> VW, Audi, BMW.</li>
+      </ul>
+    </section>
+
+    <!-- 2. Feminin -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">2. Feminin (Die)</h2>
+
+      <h3 class="text-lg font-semibold mb-3">Nach Endung</h3>
+      <div class="overflow-x-auto mb-6">
+        <table
+          class="w-full text-sm border border-border rounded-lg overflow-hidden"
+        >
+          <thead class="bg-muted text-muted-foreground">
+            <tr>
+              <th class="text-left px-4 py-2 font-semibold">Endung</th>
+              <th class="text-left px-4 py-2 font-semibold">Verlässlichkeit</th>
+              <th class="text-left px-4 py-2 font-semibold">Beispiel</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              [
+                ["‑ung", "99 %", "die Zeitung"],
+                ["‑heit", "100 %", "die Freiheit"],
+                ["‑keit", "100 %", "die Höflichkeit"],
+                ["‑schaft", "Hoch", "die Freundschaft"],
+                ["‑ei", "Hoch", "die Bäckerei"],
+                ["‑in", "Hoch", "die Studentin"],
+                ["‑ion", "Hoch", "die Station"],
+                ["‑ität", "Hoch", "die Universität"],
+                ["‑ik", "Hoch", "die Musik"],
+                ["‑ur", "Hoch", "die Natur"],
+                ["‑anz / ‑enz", "Hoch", "die Distanz"],
+                ["‑e", "Mittel", "die Lampe"],
+              ].map(([ending, reliability, example], i) => (
+                <tr
+                  class:list={[
+                    "border-t border-border",
+                    i % 2 === 0 ? "" : "bg-muted/30",
+                  ]}
+                >
+                  <td class="px-4 py-2 font-mono font-semibold">{ending}</td>
+                  <td class="px-4 py-2">{reliability}</td>
+                  <td class="px-4 py-2 italic">{example}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="text-lg font-semibold mb-3">Nach Bedeutung</h3>
+      <ul class="list-disc pl-6 space-y-1 text-sm">
+        <li><strong>Zahlen:</strong> die Eins, die Zehn.</li>
+        <li><strong>Bäume &amp; Blumen:</strong> die Eiche, die Rose.</li>
+        <li>
+          <strong>Schiffe &amp; Flugzeuge:</strong> die Titanic, die Boeing 747.
+        </li>
+      </ul>
+    </section>
+
+    <!-- 3. Neutral -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">3. Neutral (Das)</h2>
+
+      <h3 class="text-lg font-semibold mb-3">Nach Endung</h3>
+      <div class="overflow-x-auto mb-6">
+        <table
+          class="w-full text-sm border border-border rounded-lg overflow-hidden"
+        >
+          <thead class="bg-muted text-muted-foreground">
+            <tr>
+              <th class="text-left px-4 py-2 font-semibold">Endung</th>
+              <th class="text-left px-4 py-2 font-semibold">Verlässlichkeit</th>
+              <th class="text-left px-4 py-2 font-semibold">Beispiel</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              [
+                ["‑chen", "100 %", "das Mädchen"],
+                ["‑lein", "100 %", "das Fräulein"],
+                ["‑ment", "Hoch", "das Dokument"],
+                ["‑um", "Hoch", "das Zentrum"],
+                ["‑ma", "Hoch", "das Thema"],
+                ["‑tum", "Mittel", "das Eigentum"],
+              ].map(([ending, reliability, example], i) => (
+                <tr
+                  class:list={[
+                    "border-t border-border",
+                    i % 2 === 0 ? "" : "bg-muted/30",
+                  ]}
+                >
+                  <td class="px-4 py-2 font-mono font-semibold">{ending}</td>
+                  <td class="px-4 py-2">{reliability}</td>
+                  <td class="px-4 py-2 italic">{example}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="text-lg font-semibold mb-3">Nach Bedeutung</h3>
+      <ul class="list-disc pl-6 space-y-1 text-sm">
+        <li>
+          <strong>Verkleinerungsformen:</strong> Alle Wörter auf <em>‑chen</em> oder
+          <em>‑lein</em>.
+        </li>
+        <li>
+          <strong>Substantivierte Infinitive:</strong> das Essen, das Schwimmen, das
+          Lesen.
+        </li>
+        <li><strong>Farben:</strong> das Blau, das Rot.</li>
+        <li><strong>Metalle &amp; Elemente:</strong> das Gold, das Helium.</li>
+        <li><strong>Bruchzahlen:</strong> das Drittel, das Viertel.</li>
+      </ul>
+    </section>
+
+    <!-- 4. Besondere Regeln -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">4. Besondere Regeln</h2>
+
+      <h3 class="text-lg font-semibold mb-2">Das „Ge-"-Präfix</h3>
+      <p class="text-sm mb-2">
+        Nomen mit dem Präfix <strong>Ge-</strong> sind meist <strong
+          >neutral</strong
+        >.
+      </p>
+      <ul class="list-disc pl-6 space-y-1 text-sm mb-6">
+        <li><em>das Gebäude, das Gesetz, das Gespräch.</em></li>
+      </ul>
+
+      <h3 class="text-lg font-semibold mb-2">Komposita</h3>
+      <p class="text-sm mb-2">
+        Der Artikel richtet sich immer nach dem <strong>letzten Wort</strong> im Kompositum.
+      </p>
+      <ul class="list-disc pl-6 space-y-1 text-sm mb-6">
+        <li>
+          der Tisch + <strong>die</strong> Decke = <strong>die</strong> Tischdecke
+        </li>
+        <li>
+          die Hand + <strong>der</strong> Schuh = <strong>der</strong> Handschuh
+        </li>
+      </ul>
+
+      <h3 class="text-lg font-semibold mb-2">Plural</h3>
+      <p class="text-sm mb-2">
+        Im Plural ist der Artikel <strong>immer „die"</strong>.
+      </p>
+      <ul class="list-disc pl-6 space-y-1 text-sm">
+        <li>der Mann → die Männer</li>
+        <li>das Kind → die Kinder</li>
+      </ul>
+    </section>
+
+    <!-- 5. FAQ -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold mb-6">Häufige Fragen</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-base font-semibold mb-1">
+            Was ist ein Der-Die-Das-Spickzettel?
+          </h3>
+          <p class="text-sm text-muted-foreground">
+            Ein Der-Die-Das-Spickzettel ist ein kompaktes Nachschlagewerk mit
+            den wichtigsten Regeln zur Artikelbestimmung nach Endung und
+            Bedeutung. Anstatt jedes Nomen einzeln zu lernen, kannst du
+            vorhersagbare Muster anwenden.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-base font-semibold mb-1">
+            Wie viele Artikel gibt es im Deutschen?
+          </h3>
+          <p class="text-sm text-muted-foreground">
+            Es gibt drei bestimmte Artikel: <strong>der</strong> (maskulin), <strong
+              >die</strong
+            > (feminin) und <strong>das</strong> (neutral). Im Plural verwenden alle
+            Nomen <strong>die</strong>.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-base font-semibold mb-1">
+            Welche Endungen sind immer feminin?
+          </h3>
+          <p class="text-sm text-muted-foreground">
+            <strong>‑heit</strong> und <strong>‑keit</strong> sind zu 100 % feminin.
+            <strong>‑ung</strong> ist zu 99 % feminin. Weitere verlässliche feminine
+            Endungen: ‑schaft, ‑ion, ‑ität, ‑ik, ‑anz, ‑enz, ‑ur.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-base font-semibold mb-1">
+            Welche Endungen sind immer neutral?
+          </h3>
+          <p class="text-sm text-muted-foreground">
+            <strong>‑chen</strong> und <strong>‑lein</strong> sind immer neutral (100
+            %). Weitere verlässliche neutrale Endungen: ‑ment, ‑um, ‑ma, ‑tum.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-base font-semibold mb-1">
+            Welchen Artikel haben alle Substantive im Plural?
+          </h3>
+          <p class="text-sm text-muted-foreground">
+            Alle deutschen Substantive im Plural verwenden <strong>die</strong> –
+            unabhängig vom Singular-Artikel. Beispiel: der Mann → die Männer, das
+            Kind → die Kinder.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-base font-semibold mb-1">
+            Wie bestimmt man den Artikel bei Komposita?
+          </h3>
+          <p class="text-sm text-muted-foreground">
+            Bei zusammengesetzten Nomen bestimmt immer das <strong
+              >letzte Wort</strong
+            > den Artikel. Beispiel: der Tisch + die Decke = <strong>die</strong
+            >
+            Tischdecke; die Hand + der Schuh = <strong>der</strong> Handschuh.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+  </div>
+</BaseLayout>
