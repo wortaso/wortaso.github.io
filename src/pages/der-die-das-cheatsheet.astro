@@ -99,9 +99,21 @@ const faqSchema = {
       > to reinforce each rule with spaced repetition across 10,000+ nouns.
     </p>
 
+    <!-- Table of Contents -->
+    <nav class="mb-10 rounded-xl border border-border bg-muted/50 px-6 py-5">
+      <p class="text-sm font-semibold uppercase tracking-widest text-muted-foreground mb-3">Contents</p>
+      <ol class="space-y-1 text-sm">
+        <li><a href="#masculine" class="text-primary hover:underline">1. Masculine (Der)</a></li>
+        <li><a href="#feminine" class="text-primary hover:underline">2. Feminine (Die)</a></li>
+        <li><a href="#neuter" class="text-primary hover:underline">3. Neuter (Das)</a></li>
+        <li><a href="#special-rules" class="text-primary hover:underline">4. Special Rules</a></li>
+        <li><a href="#faq" class="text-primary hover:underline">5. Frequently Asked Questions</a></li>
+      </ol>
+    </nav>
+
     <!-- 1. Masculine -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6">1. Masculine (Der)</h2>
+      <h2 id="masculine" class="text-2xl font-bold mb-6">1. Masculine (Der)</h2>
 
       <h3 class="text-lg font-semibold mb-3">By Suffix</h3>
       <div class="overflow-x-auto mb-6">
@@ -154,7 +166,7 @@ const faqSchema = {
 
     <!-- 2. Feminine -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6">2. Feminine (Die)</h2>
+      <h2 id="feminine" class="text-2xl font-bold mb-6">2. Feminine (Die)</h2>
 
       <h3 class="text-lg font-semibold mb-3">By Suffix</h3>
       <div class="overflow-x-auto mb-6">
@@ -212,7 +224,7 @@ const faqSchema = {
 
     <!-- 3. Neuter -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6">3. Neuter (Das)</h2>
+      <h2 id="neuter" class="text-2xl font-bold mb-6">3. Neuter (Das)</h2>
 
       <h3 class="text-lg font-semibold mb-3">By Suffix</h3>
       <div class="overflow-x-auto mb-6">
@@ -270,7 +282,7 @@ const faqSchema = {
 
     <!-- 4. Special Rules -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6">4. Special Rules</h2>
+      <h2 id="special-rules" class="text-2xl font-bold mb-6">4. Special Rules</h2>
 
       <h3 class="text-lg font-semibold mb-2">The "Ge-" Prefix</h3>
       <p class="text-sm mb-2">
@@ -308,7 +320,7 @@ const faqSchema = {
 
     <!-- 5. FAQ -->
     <section class="mb-12">
-      <h2 class="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
+      <h2 id="faq" class="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
 
       <div class="space-y-6">
         <div>
@@ -396,7 +408,5 @@ const faqSchema = {
         </div>
       </div>
     </section>
-
-
   </div>
 </BaseLayout>

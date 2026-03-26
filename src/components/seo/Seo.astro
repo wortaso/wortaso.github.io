@@ -43,15 +43,30 @@ const canonicalURL =
   canonical ?? new URL(Astro.url.pathname, siteConfig.url).toString();
 ---
 
-<!-- Global Metadata -->
-{noindex && <meta name="robots" content="noindex, nofollow" />}
-{altHref && (
-  <>
-    <link rel="alternate" hreflang={lang === "de" ? "de" : "en"} href={selfHref} />
-    <link rel="alternate" hreflang={lang === "de" ? "en" : "de"} href={altHref} />
-    <link rel="alternate" hreflang="x-default" href={lang === "de" ? altHref : selfHref} />
-  </>
-)}
+<!-- Global Metadata -->{
+  noindex && <meta name="robots" content="noindex, nofollow" />
+}
+{
+  altHref && (
+    <>
+      <link
+        rel="alternate"
+        hreflang={lang === "de" ? "de" : "en"}
+        href={selfHref}
+      />
+      <link
+        rel="alternate"
+        hreflang={lang === "de" ? "en" : "de"}
+        href={altHref}
+      />
+      <link
+        rel="alternate"
+        hreflang="x-default"
+        href={lang === "de" ? altHref : selfHref}
+      />
+    </>
+  )
+}
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -72,7 +87,11 @@ const canonicalURL =
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={fullTitle} />
 <meta property="og:description" content={description} />
-{ogImageSrc && <meta property="og:image" content={new URL(ogImageSrc, siteConfig.url)} />}
+{
+  ogImageSrc && (
+    <meta property="og:image" content={new URL(ogImageSrc, siteConfig.url)} />
+  )
+}
 <meta property="og:locale" content={siteConfig.locale} />
 
 <!-- Twitter -->
@@ -80,7 +99,14 @@ const canonicalURL =
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={fullTitle} />
 <meta property="twitter:description" content={description} />
-{ogImageSrc && <meta property="twitter:image" content={new URL(ogImageSrc, siteConfig.url)} />}
+{
+  ogImageSrc && (
+    <meta
+      property="twitter:image"
+      content={new URL(ogImageSrc, siteConfig.url)}
+    />
+  )
+}
 {
   siteConfig.twitter && (
     <meta property="twitter:creator" content={siteConfig.twitter} />
