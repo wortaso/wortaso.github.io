@@ -1,0 +1,91 @@
+---
+import { getLangFromUrl, useTranslations, getLocalizedPath } from "@/i18n";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const privacyPath = getLocalizedPath("/privacy-policy", lang);
+---
+
+<div
+  id="cookie-consent-banner"
+  class="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background px-4 py-4 shadow-lg"
+  role="dialog"
+  aria-label="Cookie consent"
+  aria-live="polite"
+>
+  <div class="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+    <p class="text-sm text-muted-foreground">
+      {t.cookies.message}
+      {" "}
+      <a href={privacyPath} class="text-primary underline hover:no-underline">
+        {t.cookies.learnMore}
+      </a>
+    </p>
+    <div class="flex shrink-0 gap-2">
+      <button
+        id="cookie-decline"
+        type="button"
+        class="rounded-md border border-border px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+      >
+        {t.cookies.decline}
+      </button>
+      <button
+        id="cookie-accept"
+        type="button"
+        class="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
+      >
+        {t.cookies.accept}
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var GA_ID = "G-7BD4G1PX96";
+    var banner = document.getElementById("cookie-consent-banner");
+    var consent = localStorage.getItem("ga_consent");
+
+    function loadGA() {
+      if (window.__ga_loaded) return;
+      window.__ga_loaded = true;
+
+      var script = document.createElement("script");
+      script.async = true;
+      script.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () {
+        window.dataLayer.push(arguments);
+      };
+      window.gtag("js", new Date());
+      window.gtag("config", GA_ID, { anonymize_ip: true });
+    }
+
+    function hideBanner() {
+      if (banner) {
+        banner.style.display = "none";
+      }
+    }
+
+    // If already decided, hide banner immediately
+    if (consent === "accepted" || consent === "declined") {
+      hideBanner();
+      if (consent === "accepted") loadGA();
+      return;
+    }
+
+    // Otherwise show banner and wire up buttons
+    document.getElementById("cookie-accept").addEventListener("click", function () {
+      localStorage.setItem("ga_consent", "accepted");
+      hideBanner();
+      loadGA();
+    });
+
+    document.getElementById("cookie-decline").addEventListener("click", function () {
+      localStorage.setItem("ga_consent", "declined");
+      hideBanner();
+    });
+  })();
+</script>

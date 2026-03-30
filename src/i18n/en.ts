@@ -49,6 +49,13 @@ export const en = {
             "Sorry, we can't find the page you're looking for. It may have been moved or deleted.",
         backHome: "Back to Home",
     },
+    cookies: {
+        message:
+            "We use cookies to analyze website traffic and improve your experience. You can choose to accept or decline analytics cookies.",
+        accept: "Accept",
+        decline: "Decline",
+        learnMore: "Learn More",
+    },
 };
 
 export type Translations = typeof en;

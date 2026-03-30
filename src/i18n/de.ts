@@ -54,4 +54,11 @@ export const de: Translations = {
             "Diese Seite existiert leider nicht. Sie wurde möglicherweise verschoben oder gelöscht.",
         backHome: "Zurück zur Startseite",
     },
+    cookies: {
+        message:
+            "Wir verwenden Cookies, um den Website-Traffic zu analysieren und Ihr Erlebnis zu verbessern. Sie können Analyse-Cookies akzeptieren oder ablehnen.",
+        accept: "Akzeptieren",
+        decline: "Ablehnen",
+        learnMore: "Mehr erfahren",
+    },
 };

@@ -20,6 +20,7 @@ import Seo from "@/components/seo/Seo.astro";
 import Schema from "@/components/seo/Schema.astro";
 import Navbar from "@/components/layout/Navbar.astro";
 import Footer from "@/components/layout/Footer.astro";
+import CookieConsent from "@/components/ui/CookieConsent.astro";
 import { ClientRouter } from "astro:transitions";
 import "@/styles/global.css";
 import SpeedInsights from "@vercel/speed-insights/astro";
@@ -39,6 +40,7 @@ const finalOgImage = metadata?.ogImage || ogImage;
 const finalCanonical = metadata?.canonical || canonical;
 const finalIgnoreTitleTemplate = metadata?.ignoreTitleTemplate || false;
 const finalNoindex = metadata?.noindex || false;
+const isProd = import.meta.env.PROD;
 ---
 
 <!doctype html>
@@ -86,6 +88,25 @@ const finalNoindex = metadata?.noindex || false;
       // Run before the new page renders during View Transitions
       document.addEventListener("astro:after-swap", setTheme);
     </script>
+    {isProd && (
+      <!-- Google Analytics: load only if user consented (consent checked in CookieConsent component) -->
+      <script is:inline>
+        (function () {
+          var GA_ID = "G-7BD4G1PX96";
+          if (localStorage.getItem("ga_consent") === "accepted" && !window.__ga_loaded) {
+            window.__ga_loaded = true;
+            var s = document.createElement("script");
+            s.async = true;
+            s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+            document.head.appendChild(s);
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = function () { window.dataLayer.push(arguments); };
+            window.gtag("js", new Date());
+            window.gtag("config", GA_ID, { anonymize_ip: true });
+          }
+        })();
+      </script>
+    )}
   </head>
   <body
     class="bg-background text-foreground antialiased selection:bg-blue-500/30 dark:selection:text-blue-200"
@@ -171,5 +192,21 @@ const finalNoindex = metadata?.noindex || false;
       document.addEventListener("astro:page-load", setupAnimations);
       document.addEventListener("astro:after-swap", setupAnimations);
     </script>
+    {isProd && (
+      <>
+        <!-- Fire GA page_view on each View Transition navigation -->
+        <script is:inline>
+          document.addEventListener("astro:page-load", function () {
+            if (window.gtag && localStorage.getItem("ga_consent") === "accepted") {
+              window.gtag("event", "page_view", {
+                page_location: window.location.href,
+                page_title: document.title,
+              });
+            }
+          });
+        </script>
+        <CookieConsent />
+      </>
+    )}
   </body>
 </html>
