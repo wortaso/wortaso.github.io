@@ -1,0 +1,218 @@
+---
+interface Screenshot {
+  src: string;
+  alt: string;
+}
+
+interface Props {
+  tagline?: string;
+  title?: string;
+  subtitle?: string;
+  screenshots: Screenshot[];
+}
+
+const { tagline, title, subtitle, screenshots } = Astro.props;
+---
+
+<section class="py-16 md:py-24 overflow-hidden">
+  {
+    (tagline || title || subtitle) && (
+      <div class="mx-auto max-w-3xl px-4 text-center mb-12">
+        {tagline && (
+          <p class="text-sm font-semibold uppercase tracking-widest text-primary mb-3">
+            {tagline}
+          </p>
+        )}
+        {title && (
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            {title}
+          </h2>
+        )}
+        {subtitle && (
+          <p class="text-lg text-muted-foreground max-w-2xl mx-auto">
+            {subtitle}
+          </p>
+        )}
+      </div>
+    )
+  }
+
+  <div class="relative" id="carousel-wrapper">
+    <!-- Scrollable track -->
+    <div
+      id="carousel-track"
+      class="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-4 px-[max(1rem,calc(50vw-160px))]"
+      style="scrollbar-width: none; -ms-overflow-style: none;"
+      role="region"
+      aria-label="App screenshots"
+    >
+      {
+        screenshots.map((shot, i) => (
+          <div
+            class="carousel-slide flex-none snap-center w-[220px] md:w-[260px]"
+            data-index={i}
+          >
+            <img
+              src={shot.src}
+              alt={shot.alt}
+              width="260"
+              height="564"
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+              class="w-full rounded-[2rem] shadow-2xl ring-1 ring-border transition-transform duration-300"
+            />
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- Prev / Next arrows -->
+    <button
+      id="carousel-prev"
+      aria-label="Previous screenshot"
+      class="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 items-center justify-center rounded-full bg-background/90 border border-border shadow-md hover:bg-muted transition-colors"
+    >
+      <svg
+        class="w-5 h-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"><path d="M15 18l-6-6 6-6"></path></svg
+      >
+    </button>
+    <button
+      id="carousel-next"
+      aria-label="Next screenshot"
+      class="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 items-center justify-center rounded-full bg-background/90 border border-border shadow-md hover:bg-muted transition-colors"
+    >
+      <svg
+        class="w-5 h-5"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"><path d="M9 18l6-6-6-6"></path></svg
+      >
+    </button>
+  </div>
+
+  <!-- Dots -->
+  <div
+    id="carousel-dots"
+    class="flex justify-center gap-2 mt-6"
+    role="tablist"
+    aria-label="Screenshot navigation"
+  >
+    {
+      screenshots.map((_, i) => (
+        <button
+          class="carousel-dot w-2 h-2 rounded-full transition-all duration-300 bg-muted-foreground/30"
+          data-dot={i}
+          role="tab"
+          aria-selected={i === 0 ? "true" : "false"}
+          aria-label={`Screenshot ${i + 1}`}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  #carousel-track::-webkit-scrollbar {
+    display: none;
+  }
+  .carousel-dot[aria-selected="true"] {
+    background-color: var(--color-primary, #6366f1);
+    width: 1.5rem;
+  }
+  .carousel-slide img.is-active {
+    scale: 1.05;
+    box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.35);
+  }
+</style>
+
+<script>
+  const track = document.getElementById("carousel-track") as HTMLElement;
+  const dots = document.querySelectorAll<HTMLElement>(".carousel-dot");
+  const slides = document.querySelectorAll<HTMLElement>(".carousel-slide");
+  const prevBtn = document.getElementById("carousel-prev") as HTMLButtonElement;
+  const nextBtn = document.getElementById("carousel-next") as HTMLButtonElement;
+
+  let current = 0;
+  let autoTimer: ReturnType<typeof setInterval> | null = null;
+
+  function slideWidth(): number {
+    const first = slides[0];
+    return first ? first.offsetWidth + 16 : 0; // 16 = gap-4
+  }
+
+  function scrollTo(index: number) {
+    current = Math.max(0, Math.min(index, slides.length - 1));
+    track.scrollTo({ left: current * slideWidth(), behavior: "smooth" });
+    updateDots();
+    updateActiveSlide();
+  }
+
+  function updateDots() {
+    dots.forEach((dot, i) => {
+      dot.setAttribute("aria-selected", i === current ? "true" : "false");
+    });
+  }
+
+  function updateActiveSlide() {
+    slides.forEach((slide, i) => {
+      slide.querySelector("img")?.classList.toggle("is-active", i === current);
+    });
+  }
+
+  function startAuto() {
+    autoTimer = setInterval(
+      () => scrollTo((current + 1) % slides.length),
+      3500,
+    );
+  }
+
+  function stopAuto() {
+    if (autoTimer) clearInterval(autoTimer);
+    autoTimer = null;
+  }
+
+  // Arrow buttons
+  prevBtn?.addEventListener("click", () => {
+    stopAuto();
+    scrollTo(current - 1);
+  });
+  nextBtn?.addEventListener("click", () => {
+    stopAuto();
+    scrollTo(current + 1);
+  });
+
+  // Dot buttons
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => {
+      stopAuto();
+      scrollTo(Number(dot.dataset.dot));
+    });
+  });
+
+  // Sync dots on scroll (handles touch swipe)
+  track?.addEventListener(
+    "scroll",
+    () => {
+      const idx = Math.round(track.scrollLeft / slideWidth());
+      if (idx !== current) {
+        current = idx;
+        updateDots();
+        updateActiveSlide();
+      }
+    },
+    { passive: true },
+  );
+
+  // Pause on hover
+  track?.addEventListener("mouseenter", stopAuto);
+  track?.addEventListener("mouseleave", startAuto);
+
+  // Init
+  updateActiveSlide();
+  startAuto();
+</script>

@@ -1,0 +1,50 @@
+---
+interface FeatureSection {
+  tagline: string;
+  title: string;
+  description: string;
+  imageSrc: string;
+  imageAlt: string;
+}
+
+interface Props {
+  sections: FeatureSection[];
+}
+
+const { sections } = Astro.props;
+---
+
+{sections.map((section, i) => {
+  const isReversed = i % 2 !== 0;
+  return (
+    <section class="py-16 md:py-24 reveal">
+      <div class={`mx-auto max-w-6xl px-4 md:px-6 flex flex-col gap-10 md:gap-16 md:flex-row items-center ${isReversed ? "md:flex-row-reverse" : ""}`}>
+        <!-- Text -->
+        <div class="flex-1 min-w-0">
+          <p class="text-sm font-semibold uppercase tracking-widest text-primary mb-3">
+            {section.tagline}
+          </p>
+          <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+            {section.title}
+          </h2>
+          <p class="text-lg text-muted-foreground leading-relaxed">
+            {section.description}
+          </p>
+        </div>
+
+        <!-- Image -->
+        <div class="flex-none flex justify-center">
+          <img
+            src={section.imageSrc}
+            alt={section.imageAlt}
+            width="280"
+            height="607"
+            loading="lazy"
+            decoding="async"
+            class="w-[220px] md:w-[280px] rounded-[2rem] shadow-2xl ring-1 ring-border"
+          />
+        </div>
+      </div>
+    </section>
+  );
+})}
