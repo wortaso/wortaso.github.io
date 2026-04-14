@@ -121,9 +121,13 @@ export const de: Translations = {
     },
     cookies: {
         message:
-            "Wir verwenden Cookies, um den Website-Traffic zu analysieren und Ihr Erlebnis zu verbessern. Sie können Analyse-Cookies akzeptieren oder ablehnen.",
-        accept: "Akzeptieren",
-        decline: "Ablehnen",
+            "Wir verwenden Analyse-Cookies, um zu verstehen, welche Inhalte Deutschlernenden am meisten helfen.",
+        acceptAll: "Akzeptieren",
+        adjust: "Anpassen",
+        savePreferences: "Einstellungen speichern",
+        analyticsLabel: "Analyse-Cookies",
+        analyticsDescription:
+            "Hilf uns zu sehen, welche Lektionen am nützlichsten sind. Es werden keine personenbezogenen Daten an Dritte weitergegeben.",
         learnMore: "Mehr erfahren",
     },
 };

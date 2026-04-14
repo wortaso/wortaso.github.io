@@ -8,12 +8,13 @@ const privacyPath = getLocalizedPath("/privacy-policy", lang);
 
 <div
   id="cookie-consent-banner"
-  class="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background px-4 py-4 shadow-lg"
+  class="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background shadow-lg"
   role="dialog"
   aria-label="Cookie consent"
   aria-live="polite"
 >
-  <div class="mx-auto flex max-w-7xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+  <!-- Main banner row -->
+  <div class="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4 sm:flex-row sm:items-center sm:justify-between">
     <p class="text-sm text-muted-foreground">
       {t.cookies.message}
       {" "}
@@ -23,18 +24,50 @@ const privacyPath = getLocalizedPath("/privacy-policy", lang);
     </p>
     <div class="flex shrink-0 gap-2">
       <button
-        id="cookie-decline"
+        id="cookie-adjust"
         type="button"
         class="rounded-md border border-border px-4 py-2 text-sm font-medium text-muted-foreground transition-colors hover:border-foreground hover:text-foreground"
+        aria-expanded="false"
+        aria-controls="cookie-preferences-panel"
       >
-        {t.cookies.decline}
+        {t.cookies.adjust}
       </button>
       <button
-        id="cookie-accept"
+        id="cookie-accept-all"
         type="button"
         class="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
       >
-        {t.cookies.accept}
+        {t.cookies.acceptAll}
+      </button>
+    </div>
+  </div>
+
+  <!-- Preferences panel (hidden by default) -->
+  <div
+    id="cookie-preferences-panel"
+    class="hidden border-t border-border bg-muted/40 px-4 py-4"
+    role="region"
+    aria-label="Cookie preferences"
+  >
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-4 flex items-start gap-3">
+        <input
+          id="cookie-analytics-checkbox"
+          type="checkbox"
+          checked
+          class="mt-0.5 h-4 w-4 shrink-0 accent-primary"
+        />
+        <label for="cookie-analytics-checkbox" class="cursor-pointer">
+          <span class="block text-sm font-medium text-foreground">{t.cookies.analyticsLabel}</span>
+          <span class="block text-xs text-muted-foreground">{t.cookies.analyticsDescription}</span>
+        </label>
+      </div>
+      <button
+        id="cookie-save-preferences"
+        type="button"
+        class="rounded-md bg-primary px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
+      >
+        {t.cookies.savePreferences}
       </button>
     </div>
   </div>
@@ -44,6 +77,8 @@ const privacyPath = getLocalizedPath("/privacy-policy", lang);
   (function () {
     var GA_ID = "G-7BD4G1PX96";
     var banner = document.getElementById("cookie-consent-banner");
+    var panel = document.getElementById("cookie-preferences-panel");
+    var adjustBtn = document.getElementById("cookie-adjust");
     var consent = localStorage.getItem("ga_consent");
 
     function loadGA() {
@@ -64,9 +99,7 @@ const privacyPath = getLocalizedPath("/privacy-policy", lang);
     }
 
     function hideBanner() {
-      if (banner) {
-        banner.style.display = "none";
-      }
+      if (banner) banner.style.display = "none";
     }
 
     // If already decided, hide banner immediately
@@ -76,15 +109,35 @@ const privacyPath = getLocalizedPath("/privacy-policy", lang);
       return;
     }
 
-    // Otherwise show banner and wire up buttons
-    document.getElementById("cookie-accept").addEventListener("click", function () {
+    // Accept All
+    document.getElementById("cookie-accept-all").addEventListener("click", function () {
       localStorage.setItem("ga_consent", "accepted");
       hideBanner();
       loadGA();
     });
 
-    document.getElementById("cookie-decline").addEventListener("click", function () {
-      localStorage.setItem("ga_consent", "declined");
+    // Toggle preferences panel
+    adjustBtn.addEventListener("click", function () {
+      var isOpen = !panel.classList.contains("hidden");
+      if (isOpen) {
+        panel.classList.add("hidden");
+        adjustBtn.setAttribute("aria-expanded", "false");
+      } else {
+        panel.classList.remove("hidden");
+        adjustBtn.setAttribute("aria-expanded", "true");
+        document.getElementById("cookie-analytics-checkbox").focus();
+      }
+    });
+
+    // Save preferences
+    document.getElementById("cookie-save-preferences").addEventListener("click", function () {
+      var analyticsChecked = document.getElementById("cookie-analytics-checkbox").checked;
+      if (analyticsChecked) {
+        localStorage.setItem("ga_consent", "accepted");
+        loadGA();
+      } else {
+        localStorage.setItem("ga_consent", "declined");
+      }
       hideBanner();
     });
   })();

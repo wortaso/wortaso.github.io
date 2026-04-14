@@ -116,9 +116,13 @@ export const en = {
     },
     cookies: {
         message:
-            "We use cookies to analyze website traffic and improve your experience. You can choose to accept or decline analytics cookies.",
-        accept: "Accept",
-        decline: "Decline",
+            "We use analytics cookies to understand which content helps German learners most.",
+        acceptAll: "Accept",
+        adjust: "Adjust",
+        savePreferences: "Save Preferences",
+        analyticsLabel: "Analytics Cookies",
+        analyticsDescription:
+            "Help us see which lessons are most useful. No personal data is shared with third parties.",
         learnMore: "Learn More",
     },
 };

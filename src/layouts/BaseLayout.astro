@@ -193,20 +193,18 @@ const isProd = import.meta.env.PROD;
       document.addEventListener("astro:after-swap", setupAnimations);
     </script>
     {isProd && (
-      <>
-        <!-- Fire GA page_view on each View Transition navigation -->
-        <script is:inline>
-          document.addEventListener("astro:page-load", function () {
-            if (window.gtag && localStorage.getItem("ga_consent") === "accepted") {
-              window.gtag("event", "page_view", {
-                page_location: window.location.href,
-                page_title: document.title,
-              });
-            }
-          });
-        </script>
-        <CookieConsent />
-      </>
+      <!-- Fire GA page_view on each View Transition navigation -->
+      <script is:inline>
+        document.addEventListener("astro:page-load", function () {
+          if (window.gtag && localStorage.getItem("ga_consent") === "accepted") {
+            window.gtag("event", "page_view", {
+              page_location: window.location.href,
+              page_title: document.title,
+            });
+          }
+        });
+      </script>
     )}
+    <CookieConsent />
   </body>
 </html>
